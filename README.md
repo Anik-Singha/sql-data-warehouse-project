@@ -1,145 +1,384 @@
-# 📊 Data Warehouse Project
+# 📊 Modern SQL Data Warehouse Project
 
 ![SQL](https://img.shields.io/badge/SQL-Server-blue)
 ![Data Warehouse](https://img.shields.io/badge/Data-Warehouse-green)
 ![ETL](https://img.shields.io/badge/ETL-Pipelines-orange)
+![Analytics](https://img.shields.io/badge/Analytics-SQL-yellow)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-A complete **end-to-end Data Warehouse** built using **SQL Server** following industry best practices.  
-This project demonstrates **data engineering, ETL development, data modeling, and analytical reporting**.
+A complete **end-to-end Modern Data Warehouse** built using **SQL Server** following industry best practices.
+
+This project demonstrates:
+
+- Data Engineering
+- ETL Pipeline Development
+- Data Warehouse Architecture
+- Dimensional Data Modeling
+- Advanced SQL Analytics
+- Business Reporting
 
 ---
 
-## 📌 Project Overview
+# 📌 Project Overview
 
-This project implements a **modern data warehouse** using the **Medallion Architecture (Bronze → Silver → Gold)** to transform raw business data into analytics-ready datasets.
+This project implements a **Modern Data Warehouse** using the **Medallion Architecture (Bronze → Silver → Gold)** to transform raw CRM and ERP datasets into **analytics-ready business insights**.
 
-### Key Objectives:
-- Design a scalable data warehouse
-- Build ETL pipelines using SQL
-- Apply dimensional data modeling
-- Generate business-ready analytical datasets
-- Follow professional project structure and documentation
+The pipeline:
 
----
+1️⃣ Ingests raw CSV data  
+2️⃣ Cleans and standardizes datasets  
+3️⃣ Builds dimensional models  
+4️⃣ Generates analytical reports using advanced SQL
 
-## 🏗️ Data Architecture
-
-### 🥉 Bronze Layer
-- Stores raw data from source systems
-- Data ingested from CSV files
-- No transformations applied
-
-### 🥈 Silver Layer
-- Data cleaning and standardization
-- Handling nulls, duplicates, and data types
-- Data quality enforcement
-
-### 🥇 Gold Layer
-- Business-ready data
-- Star schema modeling
-- Optimized for analytics and reporting
+The final result is a **business-ready data warehouse capable of supporting analytics and reporting.**
 
 ---
 
-## 🎯 Skills Demonstrated
+# 🏗️ Data Architecture
 
-- SQL Development  
-- Data Warehousing  
-- ETL Pipeline Design  
-- Data Modeling (Star Schema)  
-- Data Cleaning & Validation  
-- Analytical Query Writing  
-- Repository & Documentation Best Practices  
+This project follows the **Medallion Architecture** approach.
 
----
+## 🥉 Bronze Layer – Raw Data
 
-## 🚀 Project Requirements
+Stores **raw source data exactly as received** from external systems.
 
-### 1️⃣ Data Engineering
-**Objective:**  
-Build a modern data warehouse using SQL Server.
+Source Systems:
 
-**Key Tasks:**
-- Import ERP & CRM datasets  
-- Clean and standardize data  
-- Integrate data into a unified model  
-- Design fact and dimension tables  
-- Maintain clear documentation  
+- CRM System  
+- ERP System  
 
----
+Tables created include:
 
-### 2️⃣ BI & Analytics
-**Objective:**  
-Generate insights using SQL queries.
+- `crm_cust_info`
+- `crm_prd_info`
+- `crm_sales_details`
+- `erp_loc_a101`
+- `erp_cust_az12`
+- `erp_px_cat_g1v2`
 
-**Analysis Includes:**
-- Customer behavior analysis  
-- Product performance evaluation  
-- Sales trend analysis (MoM, seasonal trends)  
+These tables are created using SQL DDL scripts. :contentReference[oaicite:0]{index=0}
+
+Data is loaded using a **BULK INSERT ETL stored procedure**. :contentReference[oaicite:1]{index=1}
+
+Key features:
+
+- Automated batch loading  
+- Table truncation before load  
+- Load duration tracking  
+- Error handling  
 
 ---
 
-## 📂 Repository Structure
+## 🥈 Silver Layer – Data Cleaning & Transformation
 
-```text
+The Silver layer performs **data cleansing, normalization, and transformation**.
+
+Transformations performed:
+
+- Deduplication using `ROW_NUMBER()`
+- Gender normalization
+- Marital status mapping
+- Country name standardization
+- Invalid date handling
+- Recalculation of incorrect sales values
+
+These transformations are implemented through the **Silver ETL stored procedure**. :contentReference[oaicite:2]{index=2}
+
+Silver tables also include **metadata columns to track ETL loads**. :contentReference[oaicite:3]{index=3}
+
+---
+
+## 🥇 Gold Layer – Analytical Data Model
+
+The Gold layer contains **analytics-ready views designed using a Star Schema**.
+
+### Dimension Tables
+
+- `dim_customers`
+- `dim_products`
+
+### Fact Table
+
+- `fact_sales`
+
+These views integrate CRM and ERP datasets into a unified business model. :contentReference[oaicite:4]{index=4}
+
+This layer is optimized for:
+
+- BI tools
+- Dashboards
+- Business analytics queries
+
+---
+
+# 🔍 Exploratory Data Analysis (EDA)
+
+Exploratory analysis was performed on the **Gold Layer** to validate the warehouse and generate business insights.
+
+### Analysis Includes
+
+- Database metadata exploration
+- Dimensional analysis
+- KPI calculations
+- Revenue distribution analysis
+
+### KPIs Calculated
+
+- Total Sales
+- Total Orders
+- Total Customers
+- Total Products
+- Average Price
+
+### Business Insights
+
+- Revenue by product category
+- Customer distribution by country
+- Top revenue generating products
+- Top customers by revenue
+
+All EDA queries are documented in the analysis scripts. :contentReference[oaicite:5]{index=5}
+
+---
+
+# 📈 Advanced Data Analysis
+
+The project includes **advanced analytical SQL queries** to generate business insights.
+
+---
+
+## Change Over Time Analysis
+
+Tracks how metrics evolve across time periods.
+
+Examples:
+
+- Monthly Sales Trends
+- Customer Growth
+- Quantity Sold Over Time
+
+Uses time aggregation functions:
+
+- `YEAR()`
+- `MONTH()`
+- `DATETRUNC()` :contentReference[oaicite:6]{index=6}
+
+---
+
+## Cumulative Analysis
+
+Calculates running totals and moving averages to analyze growth patterns.
+
+Examples:
+
+- Running total of sales
+- Moving average product price
+
+Implemented using SQL **window functions**. :contentReference[oaicite:7]{index=7}
+
+---
+
+## Performance Analysis
+
+Evaluates product performance over time.
+
+Metrics include:
+
+- Year-over-Year growth
+- Performance vs average
+- Sales trend direction
+
+Uses SQL functions such as:
+
+- `LAG()`
+- `AVG() OVER()` :contentReference[oaicite:8]{index=8}
+
+---
+
+## Part-to-Whole Analysis
+
+Determines how much each category contributes to total revenue.
+
+Example output:
+
+| Category | Total Sales | Contribution |
+|--------|--------|--------|
+| Bikes | 1,200,000 | 42% |
+
+Implemented using window aggregation functions. :contentReference[oaicite:9]{index=9}
+
+---
+
+## Data Segmentation
+
+Groups customers and products into meaningful segments.
+
+Customer Segments:
+
+- VIP
+- Regular
+- New
+
+Product Segments:
+
+- Low Cost
+- Medium Cost
+- High Cost
+
+Implemented using `CASE` statements and grouping logic. :contentReference[oaicite:10]{index=10}
+
+---
+
+# 📊 Analytical Reports
+
+Two analytical views were built for business reporting.
+
+---
+
+## Customer Analytics Report
+
+Metrics included:
+
+- Total Orders
+- Total Sales
+- Total Products Purchased
+- Customer Lifespan
+- Recency
+- Average Order Value
+- Average Monthly Spend
+
+Customers are also segmented by:
+
+- Age group
+- Spending behavior
+
+Implemented as:
+
+
+gold.report_customers
+
+
+:contentReference[oaicite:11]{index=11}
+
+---
+
+## Product Performance Report
+
+Tracks product-level performance metrics including:
+
+- Total Orders
+- Total Revenue
+- Total Quantity Sold
+- Total Customers
+- Average Selling Price
+- Average Monthly Revenue
+
+Products are segmented into:
+
+- High Performers
+- Mid Range
+- Low Performers
+
+Implemented as:
+
+
+gold.report_products
+
+
+:contentReference[oaicite:12]{index=12}
+
+---
+
+# 🧠 Skills Demonstrated
+
+### Data Engineering
+
+- SQL Server
+- ETL Pipeline Design
+- Data Warehouse Architecture
+
+### Data Modeling
+
+- Star Schema
+- Fact & Dimension Tables
+
+### Data Transformation
+
+- Data Cleaning
+- Data Standardization
+- Data Quality Validation
+
+### Analytical SQL
+
+- Window Functions
+- Trend Analysis
+- Customer Segmentation
+- Performance Analytics
+
+---
+
+# 📂 Repository Structure
+
+
 data-warehouse-project/
-│
-├── datasets/                           # Raw CSV files (ERP & CRM)
-│
-├── docs/                               # Documentation & diagrams
-│   ├── data_architecture.png
-│   ├── data_catalog.md
-│   ├── data_integration.png
-│   ├── data_model.png
-│   ├── naming-conventions.md
-│
-├── scripts/                            # SQL scripts
-│   ├── setup/                          # Creating Database and Schemas
-│   ├── bronze/                         # Raw data ingestion
-│   ├── silver/                         # Data transformation
-│   ├── gold/                           # Analytics layer
-│
-├── tests/                              # Data quality checks
-│
-├── README.md
-├── LICENSE
 
-```
+datasets/
+Raw CSV files (CRM & ERP)
 
+docs/
+Data architecture diagrams
+Data model documentation
 
+scripts/
+setup/
+bronze/
+silver/
+gold/
 
-## 🧪 Testing & Data Quality
+analysis/
+change_over_time.sql
+cumulative_analysis.sql
+performance_analysis.sql
+segmentation_analysis.sql
 
-Implemented quality checks include:
+reports/
+customer_report.sql
+product_report.sql
 
-- Null value detection  
-- Duplicate record checks  
-- Data type validation  
-- Referential integrity checks  
-- Row count reconciliation  
+README.md
+LICENSE
 
-All validation scripts are located in the `tests/` directory.
 
 ---
 
-## 🛡️ License
+# 🚀 Technologies Used
 
-This project is licensed under the **MIT License**.  
+- SQL Server
+- T-SQL
+- Data Warehousing
+- ETL Pipelines
+- Dimensional Modeling
+- Analytical SQL
+
+---
+
+# 🛡️ License
+
+This project is licensed under the **MIT License**.
+
 You are free to use, modify, and distribute it with attribution.
 
 ---
 
-## 👤 About the Author
+# 👤 About the Author
 
 **Anik Singha**  
-🎓 CSE Graduate | Aspiring Data Engineer  
+🎓 CSE Graduate | Aspiring Data Analyst / Data Engineer  
 
-Passionate about:
-- Data Engineering  
-- SQL & Analytics  
-- Building real-world data projects  
+Interested in:
 
-📌 Feel free to connect and explore more projects!
-
+- Data Engineering
+- Data Warehousing
+- SQL Analytics
+- Building real-world data projects
