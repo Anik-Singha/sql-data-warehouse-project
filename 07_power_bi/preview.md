@@ -1,6 +1,5 @@
+![Sales Report](sales_performance.png)
 
-[sales report](sales_performance.png)
+![Customer Report](customer_report.png)
 
-[customer report](customer_report.png)
-
-[product report](product_report.png)
+![Product Report](product_report.png)
